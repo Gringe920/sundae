@@ -6,7 +6,7 @@
 
 ## implementation
 
-You are welcome to check it out in my another repo. [link]()
+You are welcome to check it out in my another repo. [link](https://github.com/Gringe920/StudyNote/blob/master/2018/Apr/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AAnode%E5%BA%94%E7%94%A8.md)
 
 ## get it running
 

@@ -1,0 +1,11 @@
+#footer {
+  text-align: center;
+  color: #fff;
+  padding-top: 20px;
+}
+html,
+body {
+  background: url(bg.jpeg);
+  margin: 0;
+  padding: 0;
+}

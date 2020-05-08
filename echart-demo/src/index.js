@@ -7,7 +7,7 @@ var myOrderCharts = echarts.init(mainOrderDiv);
 
 myCharts.setOption({
     // title: {
-    //     text: 'Echart 入门示例'
+    //     text: 'Echart 入门示例' .
     // },
     tooltip: {},
     xAxis: {

@@ -1,0 +1,10 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index"><text>Hello index {{name}}</text>
+        <button bindtap="gotoPage">跳转Book</button><text>复选框选择: {{anonymousState__temp}}</text>
+        <checkbox checked="{{true}}" bindtap="handleClick"></checkbox>
+        <view>数据列表渲染：</view>
+        <list compid="{{$compid__7}}"></list>
+        <view>函数式组件：</view>
+        <fun-comp></fun-comp>
+    </view>
+</block>

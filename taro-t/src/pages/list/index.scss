@@ -1,0 +1,37 @@
+.list{
+    padding: 15px;
+    .list-boxs{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        flex-wrap: wrap;
+        .box{
+            border-radius: 10px;
+            width: 40%;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px 0;
+        }
+    }
+    .h-msg{
+        font-size: 40px;
+        padding: 20px 0;
+    }
+    .row{
+        display: flex;
+        height: 80px;
+        align-items: center;
+        .label{
+            width: 40%;
+        }
+        input{
+            border: 1px solid #dcdcdc;
+            height: 50px;
+        }
+    }
+    .btn-group{
+        padding: 15px;
+    }
+}

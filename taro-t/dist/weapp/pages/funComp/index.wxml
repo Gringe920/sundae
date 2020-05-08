@@ -1,2 +1,0 @@
-<block wx:if="{{$taroCompReady}}"><text bindtap="anonymousFunc0">这是一个函数式组件,点一下 </text>
-</block>

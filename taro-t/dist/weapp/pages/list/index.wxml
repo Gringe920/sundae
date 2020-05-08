@@ -1,8 +1,0 @@
-<block wx:if="{{$taroCompReady}}">
-    <view>
-        <view>{{title}}</view>
-        <view style="{{item.$loopState__temp2}}" wx:for="{{loopArray45}}" wx:for-item="item" wx:for-index="_anonIdx2">名称：{{item.$original.name}} 数量：{{item.$original.num}}</view>
-        <button bindtap="addFood">添加Food</button>
-        <button bindtap="deleteFood">删除Food</button>
-    </view>
-</block>

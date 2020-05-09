@@ -1,7 +1,10 @@
 import Taro, { Component } from "@tarojs/taro-h5";
+import 'taro-ui/dist/style/index.scss';
 
 import './app.scss';
-
+import counterStore from './store/counter';
+import listStore from './store/list';
+import { Provider } from "@tarojs/mobx-h5";
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
@@ -30,6 +33,10 @@ mountApis({
   "basename": "/",
   "customRoutes": {}
 }, _taroHistory);
+const store = {
+  counterStore, listStore
+};
+
 class App extends Component {
 
   componentDidMount() {
@@ -54,15 +61,19 @@ class App extends Component {
     // 在 App 类中的 render() 函数没有实际作用
     // 请勿修改此函数
   };render() {
-    return <Router mode={"hash"} history={_taroHistory} routes={[{
-      path: '/pages/index/index',
-      componentLoader: () => import( /* webpackChunkName: "index_index" */'./pages/index/index'),
-      isIndex: true
-    }, {
-      path: '/pages/book/index',
-      componentLoader: () => import( /* webpackChunkName: "book_index" */'./pages/book/index'),
-      isIndex: false
-    }]} customRoutes={{}} />;
+    return <Provider store={store}>
+          
+                <Router mode={"hash"} history={_taroHistory} routes={[{
+        path: '/pages/index/index',
+        componentLoader: () => import( /* webpackChunkName: "index_index" */'./pages/index/index'),
+        isIndex: true
+      }, {
+        path: '/pages/book/index',
+        componentLoader: () => import( /* webpackChunkName: "book_index" */'./pages/book/index'),
+        isIndex: false
+      }]} customRoutes={{}} />
+                
+        </Provider>;
   }
 
   componentWillUnmount() {

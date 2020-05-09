@@ -1,13 +1,20 @@
 import Taro, { Component } from '@tarojs/taro'
+import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
 import Book from './pages/book'
 import './app.scss'
-
+import counterStore from './store/counter'
+import listStore from './store/list'
+import { Provider } from '@tarojs/mobx'
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
+const store = {
+  counterStore, listStore
+}
 
 class App extends Component {
 
@@ -36,7 +43,10 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Provider store={store}>
+        <Index />
+      </Provider>
+      
     )
   }
 }

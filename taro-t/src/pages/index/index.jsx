@@ -3,7 +3,7 @@ import { View, Text, Button, Checkbox, Input} from '@tarojs/components'
 import './index.scss'
 import List from '../list/index'
 import FunComp from '../funComp/index'
-
+import service from '../../services'
 
 export default class Index extends Component {
   constructor(props){
@@ -15,7 +15,11 @@ export default class Index extends Component {
   }
   
 
-  componentWillMount () { }
+  componentWillMount () {
+    service.getBookList().then(res => {
+      console.log(res.data.result)
+    })
+  }
 
   componentDidMount () { }
 

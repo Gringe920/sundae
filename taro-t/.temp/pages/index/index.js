@@ -4,6 +4,7 @@ import { View } from '@tarojs/components';
 import './index.scss';
 import List from '../list/index';
 
+import service from "../../services/index";
 
 export default class Index extends Taro.Component {
   constructor(props) {
@@ -14,7 +15,11 @@ export default class Index extends Taro.Component {
     };
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    service.getBookList().then(res => {
+      console.log(res.data.result);
+    });
+  }
 
   componentDidMount() {}
 

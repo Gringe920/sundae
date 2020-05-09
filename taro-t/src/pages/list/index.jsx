@@ -2,6 +2,11 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button, Input} from '@tarojs/components';
 import Dialog from '../../component/dialog/index';
 import './index.scss'
+import { inject, observer }from '@tarojs/mobx';
+import { AtNoticebar, AtAvatar, AtButton } from 'taro-ui';
+
+@inject('listStore')
+@observer
 export default class List extends Component {
     constructor(props){
         super(props)
@@ -28,9 +33,23 @@ export default class List extends Component {
         
     }
     confirm = () => {
-        console.log(this.state.name)
-
         const {user, name, age} = this.state;
+        if(!name){
+            Taro.showToast({
+                title: '请输入名称',
+                icon: 'none',
+                duration: 2000
+            })
+            return
+        }
+        if(!age){
+            Taro.showToast({
+                title: '请输入年龄',
+                icon: 'none',
+                duration: 2000
+            })
+            return
+        }
         user.push({
             id: user.length + 1,
             name,
@@ -63,20 +82,31 @@ export default class List extends Component {
     }
     render(){
         const { user, addDialogShow, name, age } = this.state;
+        const {listStore: { list }} = this.props;
+        console.log('list', list)
         return (
             <View className="list">
+                <AtNoticebar />
                 <View>{this.props.title}</View>
                 <View className="list-boxs">
                 {   
                     user.map(item => {
-                    return <View className="box" style={{backgroundColor: `rgba(255, 177, 0, 0.${item.id})`}}>
+                    return <View className="box" key={item.id} style={{backgroundColor: `rgba(255, 177, 0, 0.${item.id})`}}>
                         <View>名字：{item.name}</View>
                         <View>年龄：{item.age}</View></View>
                     })
                 }
+                {
+                    list.map(item => {
+                        return <View className="box" key={item.uid}>
+                                <AtAvatar image={item.thumbnail} circle size="small"/>
+                                {item.text}
+                                </View>
+                    })
+                }
                 </View>
-                <Button onClick={this.addFood}>添加</Button>
-                <Button onClick={this.deleteFood}>删除</Button>
+                <AtButton onClick={this.addFood} type='primary' size="small">添加</AtButton>
+                <AtButton onClick={this.deleteFood} type='primary' size="small">删除</AtButton>
                 {
                     addDialogShow && 
                     <Dialog 

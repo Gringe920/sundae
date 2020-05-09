@@ -1,9 +1,14 @@
 import Nerv from "nervjs";
-import Taro from "@tarojs/taro-h5";
+import Taro, { showToast as _showToast } from "@tarojs/taro-h5";
 import { View, Text, Button, Input } from '@tarojs/components';
 import Dialog from '../../component/dialog/index';
 import './index.scss';
-export default class List extends Taro.Component {
+import { inject, observer } from "@tarojs/mobx-h5";
+import { AtNoticebar, AtAvatar, AtButton } from 'taro-ui';
+
+export default @inject('listStore')
+@observer
+class List extends Taro.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,9 +30,23 @@ export default class List extends Taro.Component {
     });
   };
   confirm = () => {
-    console.log(this.state.name);
-
     const { user, name, age } = this.state;
+    if (!name) {
+      _showToast({
+        title: '请输入名称',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    if (!age) {
+      _showToast({
+        title: '请输入年龄',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
     user.push({
       id: user.length + 1,
       name,
@@ -60,17 +79,26 @@ export default class List extends Taro.Component {
   };
   render() {
     const { user, addDialogShow, name, age } = this.state;
+    const { listStore: { list } } = this.props;
+    console.log('list', list);
     return <View className="list">
+                <AtNoticebar />
                 <View>{this.props.title}</View>
                 <View className="list-boxs">
                 {user.map(item => {
-          return <View className="box" style={{ backgroundColor: `rgba(255, 177, 0, 0.${item.id})` }}>
+          return <View className="box" key={item.id} style={{ backgroundColor: `rgba(255, 177, 0, 0.${item.id})` }}>
                         <View>名字：{item.name}</View>
                         <View>年龄：{item.age}</View></View>;
         })}
+                {list.map(item => {
+          return <View className="box" key={item.uid}>
+                                <AtAvatar image={item.thumbnail} circle size="small" />
+                                {item.text}
+                                </View>;
+        })}
                 </View>
-                <Button onClick={this.addFood}>添加</Button>
-                <Button onClick={this.deleteFood}>删除</Button>
+                <AtButton onClick={this.addFood} type="primary" size="small">添加</AtButton>
+                <AtButton onClick={this.deleteFood} type="primary" size="small">删除</AtButton>
                 {addDialogShow && <Dialog renderHeader={<View className="h-msg">添加人物</View>} renderFooter={<View className="btn-group">
                                 <Button onClick={this.confirm}>确定</Button>
                                 <Button onClick={() => {

@@ -1,14 +1,21 @@
 const config = {
+  //项目名称
   projectName: 'taro-t',
+  //项目创建时间
   date: '2020-5-6',
+  //设计稿尺寸
   designWidth: 750,
+  //兼容非375 750 810等情况
   deviceRatio: {
     '640': 2.34 / 2,
     '750': 1,
     '828': 1.81 / 2
   },
+  //项目源码目录
   sourceRoot: 'src',
+  //项目输出地址
   outputRoot: `dist/${process.env.TARO_ENV}`,
+  //babel编译配置
   babel: {
     sourceMap: true,
     presets: [
@@ -28,15 +35,19 @@ const config = {
       }]
     ]
   },
+  //插件配置
   plugins: [],
+  //全局变量设置
   defineConstants: {
   },
+  //小程序端专用配置
   mini: {
     postcss: {
       pxtransform: {
         enable: true,
         config: {}
       },
+      //小程序样式引用本地资源内联配置
       url: {
         enable: true,
         config: {
@@ -52,6 +63,7 @@ const config = {
       }
     }
   },
+  // h5端配置
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
@@ -73,7 +85,8 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
-    }
+    },
+    esnextModules: ['taro-ui']
   }
 }
 
